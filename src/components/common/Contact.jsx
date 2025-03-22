@@ -7,7 +7,11 @@ import Footer from "./Footer";
 const Contact = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [focusedField, setFocusedField] = useState("");
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [modalMessage, setModalMessage] = useState("");
   const [formErrors, setFormErrors] = useState({});
 
@@ -28,7 +32,10 @@ const Contact = () => {
   const socialIcons = [
     { icon: <HiMail />, link: "mailto:ashirbadprusty3@gmail.com" },
     { icon: <FaGithub />, link: "https://github.com/ashirbadprusty" },
-    { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/ashirbad-narayan-prusty-ba559927b/" },
+    {
+      icon: <FaLinkedin />,
+      link: "https://www.linkedin.com/in/ashirbad-narayan-prusty-ba559927b/",
+    },
   ];
 
   const handleChange = (e) => {
@@ -61,12 +68,16 @@ const Contact = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         });
-        setModalMessage(response.ok
-          ? "Message Sent! Thank you for your message. I'll get back to you soon."
-          : "Error: Unable to send your message. Please try again later.");
+        setModalMessage(
+          response.ok
+            ? "Message Sent! Thank you for your message. I'll get back to you soon."
+            : "Error: Unable to send your message. Please try again later."
+        );
         if (response.ok) setFormData({ name: "", email: "", message: "" });
       } catch {
-        setModalMessage("Error: Unable to send your message. Please try again later.");
+        setModalMessage(
+          "Error: Unable to send your message. Please try again later."
+        );
       }
       setIsModalOpen(true);
     }
@@ -75,21 +86,29 @@ const Contact = () => {
   const renderField = (placeholder, Icon, name, type = "text") => (
     <div className="flex flex-col w-full mb-6 relative">
       <div className="relative group">
-        <div className={`absolute inset-y-0 left-0 flex items-center pl-3 text-xl pointer-events-none transition-colors duration-300 ${focusedField === name ? "text-Green" : "text-gray-400"}`}>
+        <div
+          className={`absolute inset-y-0 left-0 flex items-center pl-3 text-xl pointer-events-none transition-colors duration-300 ${
+            focusedField === name ? "text-Green" : "text-gray-400"
+          }`}
+        >
           <Icon />
         </div>
         <input
           type={type}
           name={name}
           value={formData[name]}
-          className={`pl-10 p-2 w-full rounded-lg bg-black text-Snow focus:outline-none focus:ring-2 focus:ring-Green focus:border-transparent transition duration-300 ease-in-out ${formErrors[name] ? "border-red-500" : ""}`}
+          className={`pl-10 p-2 w-full rounded-lg bg-black text-Snow focus:outline-none focus:ring-2 focus:ring-Green focus:border-transparent transition duration-300 ease-in-out ${
+            formErrors[name] ? "border-red-500" : ""
+          }`}
           placeholder={placeholder}
           onFocus={() => setFocusedField(name)}
           onBlur={() => setFocusedField("")}
           onChange={handleChange}
         />
-        {formErrors[name] && <div className="absolute left-0 bottom-full mb-1 w-auto bg-red-500 text-white p-2 rounded-md">{formErrors[name]}</div>}
       </div>
+      {formErrors[name] && (
+        <div className="text-red-500 text-sm mt-1 ml-4">{formErrors[name]}</div>
+      )}
     </div>
   );
 
@@ -101,7 +120,10 @@ const Contact = () => {
           <h1 className="text-lg font-bold">Contact Information</h1>
           <div className="flex flex-col md:flex-row items-center gap-5 text-xs">
             {[contactDetails, personalDetails].map((details, idx) => (
-              <div key={idx} className="bg-EveningBlack hover:bg-gradient-to-br from-green-950 rounded-xl w-full md:w-1/2 p-5 md:p-6 lg:p-8 flex flex-col gap-y-4">
+              <div
+                key={idx}
+                className="bg-EveningBlack hover:bg-gradient-to-br from-green-950 rounded-xl w-full md:w-1/2 p-5 md:p-6 lg:p-8 flex flex-col gap-y-4"
+              >
                 {details.map(({ label, value }, i) => (
                   <div key={i} className="flex justify-between items-center">
                     <span className="md:text-base">{label}:</span>
@@ -116,7 +138,15 @@ const Contact = () => {
         {/* Contact Icons */}
         <div className="h-16 w-full bg-EveningBlack hover:bg-gradient-to-br from-green-950 rounded-xl text-xl sm:text-3xl flex gap-x-8 sm:gap-x-16 items-center justify-center text-Snow">
           {socialIcons.map(({ icon, link }, idx) => (
-            <a key={idx} className="hover:scale-125 ease-in-out duration-700" href={link} target="_blank" rel="noreferrer">{icon}</a>
+            <a
+              key={idx}
+              className="hover:scale-125 ease-in-out duration-700"
+              href={link}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {icon}
+            </a>
           ))}
         </div>
 
@@ -129,23 +159,40 @@ const Contact = () => {
               {renderField("Email", HiMail, "email", "email")}
               <div className="flex flex-col w-full mb-8 relative group">
                 <div className="relative">
-                  <div className={`absolute top-3 left-0 flex items-center pl-3 text-lg pointer-events-none ${focusedField === "message" ? "text-Green" : "text-gray-400"}`}>
+                  <div
+                    className={`absolute top-3 left-0 flex items-center pl-3 text-lg pointer-events-none ${
+                      focusedField === "message"
+                        ? "text-Green"
+                        : "text-gray-400"
+                    }`}
+                  >
                     <BsChatTextFill />
                   </div>
                   <textarea
                     name="message"
                     rows={6}
                     value={formData.message}
-                    className={`pl-10 p-2 w-full rounded-lg bg-black text-Snow focus:outline-none focus:ring-2 focus:ring-Green focus:border-transparent transition duration-300 ease-in-out ${formErrors.message ? "border-red-500" : ""}`}
+                    className={`pl-10 p-2 w-full rounded-lg bg-black text-Snow focus:outline-none focus:ring-2 focus:ring-Green focus:border-transparent transition duration-300 ease-in-out ${
+                      formErrors.message ? "border-red-500" : ""
+                    }`}
                     placeholder="Message"
                     onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField("")}
                     onChange={handleChange}
                   />
-                  {formErrors.message && <div className="absolute left-0 bottom-full mb-1 w-auto bg-red-500 text-white p-2 rounded-md">{formErrors.message}</div>}
+                  {formErrors.message && (
+                    <div className="text-red-500 text-sm mt-1 ml-4">
+                      {formErrors.message}
+                    </div>
+                  )}
                 </div>
               </div>
-              <button type="submit" className="bg-Green font-cascadia text-black py-2 px-5 rounded-lg hover:bg-green-600 transition duration-300">SEND MESSAGE</button>
+              <button
+                type="submit"
+                className="bg-Green font-cascadia text-black py-2 px-5 rounded-lg hover:bg-green-600 transition duration-300"
+              >
+                SEND MESSAGE
+              </button>
             </div>
           </form>
         </div>
@@ -157,7 +204,12 @@ const Contact = () => {
           <div className="bg-EveningBlack w-4/5 md:w-3/5 lg:w-2/5 p-10 rounded-3xl text-Snow">
             <h1 className="text-lg">{modalMessage}</h1>
             <div className="flex justify-center">
-              <button className="p-2 bg-Green text-Snow rounded-md text-sm" onClick={() => setIsModalOpen(false)}>Close</button>
+              <button
+                className="p-2 bg-Green text-Snow rounded-md text-sm"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
