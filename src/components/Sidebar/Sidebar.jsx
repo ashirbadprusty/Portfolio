@@ -65,24 +65,23 @@ const Sidebar = ({ isOpen, onClose }) => {
 
           {/* Social Media Links */}
           <div className="flex justify-center space-x-6 items-center rounded-b-xl bottom-0 z-50 h-12  w-full bg-DarkGray text-Snow py-4 md:py-6 lg:py-8">
-  <a
-    href="https://github.com/ashirbadprusty"
-    className="text-gray-400 hover:text-gray-200"
-    target="_blank"
-    rel="noreferrer"
-  >
-    <FaGithub size={24} />
-  </a>
-  <a
-    href="https://www.linkedin.com/in/ashirbad-narayan-prusty-ba559927b/"
-    className="text-gray-400 hover:text-gray-200"
-    target="_blank"
-    rel="noreferrer"
-  >
-    <FaLinkedin size={24} />
-  </a>
-</div>
-
+            <a
+              href="https://github.com/ashirbadprusty"
+              className="text-gray-400 hover:text-gray-200"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaGithub size={24} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/ashirbad-narayan-prusty-ba559927b/"
+              className="text-gray-400 hover:text-gray-200"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaLinkedin size={24} />
+            </a>
+          </div>
         </div>
       </div>
 

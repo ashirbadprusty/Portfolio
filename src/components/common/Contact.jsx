@@ -36,23 +36,23 @@ const Contact = () => {
     setFormErrors({ ...formErrors, [e.target.name]: "" });
   };
 
-  const validateForm = () => {
-    const errors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.name) errors.name = "Name is required.";
-    if (!formData.email) {
-      errors.email = "Email is required.";
-    } else if (!emailRegex.test(formData.email)) {
-      errors.email = "Please enter a valid email address.";
-    }
-    if (!formData.message) errors.message = "Message is required.";
-    return errors;
-  };
+  // const validateForm = () => {
+  //   const errors = {};
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   if (!formData.name) errors.name = "Name is required.";
+  //   if (!formData.email) {
+  //     errors.email = "Email is required.";
+  //   } else if (!emailRegex.test(formData.email)) {
+  //     errors.email = "Please enter a valid email address.";
+  //   }
+  //   if (!formData.message) errors.message = "Message is required.";
+  //   return errors;
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const errors = validateForm();
-    setFormErrors(errors);
+    // const errors = validateForm();
+    // setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
       try {
@@ -87,8 +87,9 @@ const Contact = () => {
           onFocus={() => setFocusedField(name)}
           onBlur={() => setFocusedField("")}
           onChange={handleChange}
+          required
         />
-        {formErrors[name] && <div className="absolute left-0 bottom-full mb-1 w-auto bg-red-500 text-white p-2 rounded-md">{formErrors[name]}</div>}
+        {/* {formErrors[name] && <div className="absolute left-0 bottom-full mb-1 w-auto bg-red-500 text-white p-2 rounded-md">{formErrors[name]}</div>} */}
       </div>
     </div>
   );
@@ -138,6 +139,7 @@ const Contact = () => {
                     value={formData.message}
                     className={`pl-10 p-2 w-full rounded-lg bg-black text-Snow focus:outline-none focus:ring-2 focus:ring-Green focus:border-transparent transition duration-300 ease-in-out ${formErrors.message ? "border-red-500" : ""}`}
                     placeholder="Message"
+                    required
                     onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField("")}
                     onChange={handleChange}
